@@ -3,7 +3,7 @@
 </p>
 
 # Angular Universal Starter [![Universal Angular](https://img.shields.io/badge/universal-angular2-brightgreen.svg?style=flat)](https://github.com/angular/universal)
-> Server-Side Rendering for Angular
+> Server-Side Rendering for Angular（angular服务端渲染）
 
 A minimal Angular starter for Universal JavaScript using TypeScript and Webpack
 
