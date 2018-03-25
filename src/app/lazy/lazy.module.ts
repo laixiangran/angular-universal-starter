@@ -1,20 +1,12 @@
-import {NgModule, Component} from '@angular/core';
-import {RouterModule} from '@angular/router';
-
-@Component({
-    selector: 'app-lazy-view',
-    template: `<h3>i'm lazy</h3>`
-})
-export class LazyComponent {
-}
+import { NgModule } from '@angular/core';
+import { LazyComponent } from './lazy.component';
+import { LazyRoutingModule } from './lazy.routes';
 
 @NgModule({
-    declarations: [LazyComponent],
-    imports: [
-        RouterModule.forChild([
-            {path: '', component: LazyComponent, pathMatch: 'full'}
-        ])
-    ]
+	declarations: [LazyComponent],
+	imports: [
+		LazyRoutingModule
+	]
 })
 export class LazyModule {
 
