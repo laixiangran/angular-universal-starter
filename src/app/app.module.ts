@@ -1,21 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { APP_ID, Inject, NgModule, PLATFORM_ID } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { isPlatformBrowser } from '@angular/common';
 import { AppRoutingModule } from './app.routes';
+import { ENgxServicesModule } from 'e-ngx-services';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		HomeComponent,
-	],
 	imports: [
 		AppRoutingModule,
 		BrowserModule.withServerTransition({appId: 'my-app'}),
-		TransferHttpCacheModule
+		TransferHttpCacheModule,
+		ENgxServicesModule,
+		HttpClientModule,
+		HttpModule
+	],
+	declarations: [
+		AppComponent,
+		HomeComponent
 	],
 	providers: [],
 	bootstrap: [AppComponent]

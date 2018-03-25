@@ -5,8 +5,7 @@ import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
 	{path: '', component: HomeComponent, pathMatch: 'full'},
-	{path: 'lazy', loadChildren: './lazy/lazy.module#LazyModule'},
-	{path: 'lazy/nested', loadChildren: './lazy/lazy.module#LazyModule'}
+	{path: 'lazy', loadChildren: './lazy/lazy.module#LazyModule'}
 ];
 
 @NgModule({
