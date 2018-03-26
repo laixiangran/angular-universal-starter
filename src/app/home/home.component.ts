@@ -3,7 +3,7 @@ import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-const DETAIL_KEY = makeStateKey('detail');
+const KFCLIST_KEY = makeStateKey('kfcList');
 
 @Component({
 	selector: 'app-home',
@@ -22,22 +22,21 @@ export class HomeComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.message = '欢迎进入首页！';
 
-		this.kfcList = this.state.get(DETAIL_KEY, null as any);
-
-		console.log(this.kfcList);
+		// 采用一个标记来区分服务端是否已经拿到了数据，如果没拿到数据就在客户端请求，如果已经拿到数据就不发请求
+		this.kfcList = this.state.get(KFCLIST_KEY, null as any);
 
 		if (!this.kfcList || this.kfcList.length === 0) {
 			this.poiSearch(this.keyword, '北京市').subscribe((data: any) => {
 				console.log(data);
 				this.kfcList = data.pois;
-				this.state.set(DETAIL_KEY, this.kfcList as any);
+				this.state.set(KFCLIST_KEY, this.kfcList as any);
 			});
 		}
 	}
 
 	ngOnDestroy() {
 		if (typeof window === 'object') {
-			this.state.set(DETAIL_KEY, null as any);
+			this.state.set(KFCLIST_KEY, null as any);
 			this.kfcList = [];
 		}
 	}
