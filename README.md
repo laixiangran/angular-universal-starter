@@ -44,7 +44,7 @@
 
  - 对于服务器软件包，您可能需要将第三方模块包含到`nodeExternals`白名单中
 
- - **`window`**, **`document`**, **`navigator`**以及其它的浏览器类型 - _不存在于服务端_ - 如果你直接使用，在服务端将无法正常工作。 以下几种方法可以让你的代码正常工作：
+ - **`window`**, **`document`**, **`navigator`** 以及其它的浏览器类型 - _不存在于服务端_ - 如果你直接使用，在服务端将无法正常工作。 以下几种方法可以让你的代码正常工作：
  
     - 可以通过`PLATFORM_ID`标记注入的`Object`来检查当前平台是浏览器还是服务器，然后使用浏览器端特有的类型
     
@@ -70,7 +70,7 @@
      
      - 对于RxJs超时，请确保在成功时 _取消_ 它们的流，因为它们也会降低渲染速度。
    
- - **不要直接操作nativeElement**. 使用[Renderer2](https://angular.io/api/core/Renderer2)，从而可以跨平台改变应用视图。
+ - **不要直接操作nativeElement**，使用[Renderer2](https://angular.io/api/core/Renderer2)，从而可以跨平台改变应用视图。
  
 ```typescript
 constructor(element: ElementRef, renderer: Renderer2) {
