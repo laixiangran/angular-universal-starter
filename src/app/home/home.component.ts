@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AMapWebService } from 'e-ngx-services';
-import { Http } from '@angular/http';
+import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
+const DETAIL_KEY = makeStateKey('detail');
 
 @Component({
 	selector: 'app-home',
@@ -12,26 +15,31 @@ export class HomeComponent implements OnInit {
 	keyword: string = '肯德基';
 	kfcList: any[] = [];
 
-	constructor(public aMapWebServic: AMapWebService, public http: Http) {
+	constructor(public http: HttpClient,
+				private state: TransferState) {
 	}
 
 	ngOnInit() {
 		this.message = '欢迎进入首页！';
-		console.log(this.message);
-		this.aMapWebServic.poiSearch(this.keyword, '北京市').subscribe((data: any) => {
-			this.kfcList = data.pois;
-		});
-		this.http.get(`http://restapi.amap.com/v3/place/text?keywords=肯德基&city=北京市&offset=20&key=55f909211b9950837fba2c71d0488db9&extensions=all`)
-			.subscribe((data: any) => {
-			// this.kfcList = data.pois;
-			console.log(JSON.parse(data._body).pois);
-		});
+
+		this.kfcList = this.state.get(DETAIL_KEY, null as any);
+
+		if (!this.kfcList || this.kfcList.length === 0) {
+			this.poiSearch(this.keyword, '北京市').subscribe((data: any) => {
+				this.kfcList = data.pois;
+				this.state.set(DETAIL_KEY, this.kfcList as any);
+			});
+		}
 	}
 
 	query() {
-		this.keyword = this.keyword === '肯德基' ? '麦当劳' : '肯德基' ;
-		this.aMapWebServic.poiSearch(this.keyword, '北京市').subscribe((data: any) => {
+		this.keyword = this.keyword === '肯德基' ? '麦当劳' : '肯德基';
+		this.poiSearch(this.keyword, '北京市').subscribe((data: any) => {
 			this.kfcList = data.pois;
 		});
+	}
+
+	poiSearch(text: string, city?: string): Observable<any> {
+		return this.http.get(`http://restapi.amap.com/v3/place/text?keywords=${text}&city=${city}&offset=20&key=55f909211b9950837fba2c71d0488db9&extensions=all`);
 	}
 }
