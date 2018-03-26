@@ -35,6 +35,7 @@
 **`npm run ssr`** - 编译应用程序，并启动一个Node Express来为应用程序提供服务 `http://localhost:4000`。
 
 **`npm run prerender`** - 编译应用程序并预​​渲染应用程序文件，启动一个演示http服务器，以便您可以查看它 `http://localhost:8080`
+
 **注意**: 要将静态网站部署到静态托管平台，您必须部署`dist/browser`文件夹, 而不是`dist`文件夹
 
 
