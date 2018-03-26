@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 		if (!this.kfcList || this.kfcList.length === 0) {
 			this.poiSearch(this.keyword, '北京市').subscribe((data: any) => {
-				console.log(data);
 				this.kfcList = data.pois;
 				this.state.set(KFCLIST_KEY, this.kfcList as any);
 			});
