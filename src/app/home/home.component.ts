@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -10,7 +10,7 @@ const DETAIL_KEY = makeStateKey('detail');
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 	message: string;
 	keyword: string = '肯德基';
 	kfcList: any[] = [];
@@ -24,11 +24,21 @@ export class HomeComponent implements OnInit {
 
 		this.kfcList = this.state.get(DETAIL_KEY, null as any);
 
+		console.log(this.kfcList);
+
 		if (!this.kfcList || this.kfcList.length === 0) {
 			this.poiSearch(this.keyword, '北京市').subscribe((data: any) => {
+				console.log(data);
 				this.kfcList = data.pois;
 				this.state.set(DETAIL_KEY, this.kfcList as any);
 			});
+		}
+	}
+
+	ngOnDestroy() {
+		if (typeof window === 'object') {
+			this.state.set(DETAIL_KEY, null as any);
+			this.kfcList = [];
 		}
 	}
 
@@ -40,6 +50,6 @@ export class HomeComponent implements OnInit {
 	}
 
 	poiSearch(text: string, city?: string): Observable<any> {
-		return this.http.get(`http://restapi.amap.com/v3/place/text?keywords=${text}&city=${city}&offset=20&key=55f909211b9950837fba2c71d0488db9&extensions=all`);
+		return this.http.get(encodeURI(`http://restapi.amap.com/v3/place/text?keywords=${text}&city=${city}&offset=20&key=55f909211b9950837fba2c71d0488db9&extensions=all`));
 	}
 }
