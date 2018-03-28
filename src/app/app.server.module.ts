@@ -12,9 +12,7 @@ import { AppComponent } from './app.component';
 		ModuleMapLoaderModule, // 用于实现服务端的路由的惰性加载
 		ServerTransferStateModule, // 在服务端导入，用于实现将状态从服务器传输到客户端
 	],
-	// Since the bootstrapped component is not inherited from your
-	// imported AppModule, it needs to be repeated here.
-	bootstrap: [AppComponent],
+	bootstrap: [AppComponent], // 由于该启动器不是从AppModule继承来的，因此需要重新启动AppComponent
 })
 export class AppServerModule {
 }
