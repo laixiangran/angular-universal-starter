@@ -1,7 +1,7 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { AppModule } from './app/app.module';
+import { AppBrowserModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 if (environment.production) {
@@ -10,5 +10,5 @@ if (environment.production) {
 
 // 在 DOMContentLoaded 时运行我们的代码，以使 TransferState 正常工作
 document.addEventListener('DOMContentLoaded', () => {
-	platformBrowserDynamic().bootstrapModule(AppModule);
+	platformBrowserDynamic().bootstrapModule(AppBrowserModule);
 });
