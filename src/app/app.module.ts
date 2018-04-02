@@ -2,7 +2,7 @@ import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-bro
 import { HttpClientModule } from '@angular/common/http';
 import { APP_ID, Inject, NgModule, PLATFORM_ID } from '@angular/core';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { isPlatformBrowser } from '@angular/common';
 import { AppRoutingModule } from './app.routes';

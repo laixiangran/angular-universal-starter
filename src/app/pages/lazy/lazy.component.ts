@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { TransformService } from '../../services/transform.service';
 
 @Component({
 	selector: 'app-lazy',
@@ -10,7 +11,8 @@ import { Observable } from 'rxjs/Observable';
 export class LazyComponent implements OnInit {
 	kfcList: any[] = [];
 
-	constructor(public http: HttpClient) {
+	constructor(public http: HttpClient,
+				public transformService: TransformService) {
 	}
 
 	ngOnInit() {

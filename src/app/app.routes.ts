@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const appRoutes: Routes = [
 	{path: '', component: HomeComponent, pathMatch: 'full'},
-	{path: 'lazy', loadChildren: './lazy/lazy.module#LazyModule'}
+	{path: 'lazy', loadChildren: './pages/lazy/lazy.module#LazyModule'}
 ];
 
 @NgModule({
